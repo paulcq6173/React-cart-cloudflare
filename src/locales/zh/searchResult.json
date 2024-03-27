@@ -1,0 +1,15 @@
+{
+    "SearchLoading":"搜尋載入中",
+    "PopularItems":"人氣商品一覽",
+    "SearchResults":"搜尋關鍵字：",
+    "ResultList":"結果一覽",
+    "NoResultSorry":"很抱歉，此關鍵字查無結果：",
+    "Author":"作者",
+    "ListPrice":"定價",
+    "PriceOFF":"折扣",
+    "Discussion": " 則討論",
+    "NoImportFeeDeposit":"無進口關稅",
+    "Stock":"存貨",
+    "Unavailible":"無存貨",
+    "CheckDetail": "商品詳細"
+}

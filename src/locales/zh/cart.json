@@ -1,0 +1,14 @@
+{
+    "MyShoppingCart":"我的購物車",
+    "CheckoutConfirm":"確定要結帳嗎？",
+    "EmptyCart":"你的購物車是空的。",
+    "Update":"更新",
+    "Delete":"刪除",
+    "SubTotal":"小計",
+    "Error": {
+        "UploadFailed":"上傳訂單失敗。",
+        "UserNotFound":"找不到使用者資料，請重新登入後再試。",
+        "Unexpected":"發生未預期錯誤。",
+        "UserIsNull":"未預期錯誤: 無使用者資料。"
+    }
+}

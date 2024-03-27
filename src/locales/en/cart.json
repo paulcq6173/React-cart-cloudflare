@@ -1,0 +1,14 @@
+{
+    "MyShoppingCart":"My Shopping Cart",
+    "CheckoutConfirm":"Checkout Now?",
+    "EmptyCart":"Your cart is empty.",
+    "Update":"update",
+    "Delete":"delete",
+    "SubTotal":"Subtotal",
+    "Error": {
+        "UploadFailed":"Failed to upload order.",
+        "UserNotFound":"User not found. Please login again before retry.",
+        "Unexpected":"Unexpected error.",
+        "UserIsNull":"Unexpected error: user is null."
+    }
+}

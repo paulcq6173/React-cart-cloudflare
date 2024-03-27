@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*@layer components {
+  .btn-topNav {
+    @apply flex text-white hover:bg-lime-200 rounded;
+  }
+}*/

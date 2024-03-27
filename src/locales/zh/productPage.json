@@ -1,0 +1,19 @@
+{
+   "Info": {
+        "Title":"商品資訊",
+        "Author":"創作者",
+        "Stock":"存貨",
+        "InStock":"有現貨可訂購",
+        "Unavail":"無存貨",
+        "BuyNow":"立即購買",
+        "Desc":"商品描述",
+        "RelatedItems":"相關商品"
+    },
+    "Spec": {
+        "Print length":"裝訂頁數",
+        "ReleaseDate":"首次發行日",
+        "Lang":"語言",
+        "Manufacturer":"製造商",
+        "Studio":"片商"
+    }
+}

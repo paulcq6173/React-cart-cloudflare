@@ -1,0 +1,19 @@
+{
+   "Info": {
+        "Title":"Product Information",
+        "Author":"Author",
+        "Stock":"Stock",
+        "InStock":"In Stock",
+        "Unavail":"Unavailible",
+        "BuyNow":"Buy Now",
+        "Desc":"Description",
+        "RelatedItems":"Related Items"
+    },
+    "Spec": {
+        "Print length":"Print length",
+        "ReleaseDate":"Release date",
+        "Lang":"Language",
+        "Manufacturer":"Manufacturer",
+        "Studio":"Studio"
+    }
+}
