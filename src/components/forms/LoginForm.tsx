@@ -4,6 +4,7 @@ import { resetMessage, setMessage } from '@/reducers/notifySlice';
 import { useAppDispatch } from '@/reducers/reduxHooks';
 import authService from '@/services/authService';
 import errorHelper from '@/utils/errorHelper';
+import localStorageHelper from '@/utils/localStorageHelper';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import Notification from '../Notification';
@@ -37,7 +38,7 @@ const LoginForm = () => {
           return;
       }
 
-      window.localStorage.setItem('loggedUser', JSON.stringify(response));
+      localStorageHelper.saveUser(response);
       dispatch(userLogin(response));
 
       loginHook.onReset();

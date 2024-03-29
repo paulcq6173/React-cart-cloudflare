@@ -1,12 +1,12 @@
 import { MovieRelated, politicsRelated } from '@/dummyData';
+import ProductSpec from '@/mobile/components/sub-components/MobileProductSpec';
+import RelatedItemList from '@/mobile/components/sub-components/MobileRelatedItemList';
 import { addCartItem, selectCart, updateItemQty } from '@/reducers/cartSlice';
 import { selectUser } from '@/reducers/loginSlice';
 import { useAppDispatch, useAppSelector } from '@/reducers/reduxHooks';
 import { IData } from '@/utils/types';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import ProductSpec from '../sub-components/ProductSpec';
-import RelatedItemList from '../sub-components/RelatedItemList';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface IRelatedItems {
   id: number;
@@ -127,32 +127,44 @@ const ProductLayout = ({ props }: { props: IData }) => {
   };
 
   return (
-    <div className="bg-white m-auto w-3/4 h-auto flex flex-col justify-center">
-      <div className="flex pt-12 justify-center gap-2.5 mb-2">
-        <div className="h-64 w-auto">
-          <img src={image} alt="" className="h-64 w-50" />
+    <div className="w-screen m-auto w-3/4 h-auto flex flex-col justify-center">
+      <button className="mt-1 ml-1 flex w-16 justify-start text-sm font-medium bg-green-600 rounded-sm text-white focus:bg-lime-400 focus:text-black">
+        <Link
+          className="flex w-full justify-center text-center"
+          to="/mobile/products/search"
+        >
+          Back
+        </Link>
+      </button>
+      <div className="w-full flex pt-2 gap-1 sm:gap-2.5 sm:pt-4 mb-2">
+        <div className="ml-1 bg-gray-200 items-center">
+          <img
+            src={image}
+            alt=""
+            className="object-cover h-32 w-28 sm:h-64 sm:w-48"
+          />
         </div>
-        <div className="block">
-          <h3>{title}</h3>
+        <div className="block w-1/2">
+          <h3 className="text-sm sm:text-base">{title}</h3>
           <div>
-            <button className="items-center justify-center font-bold h-8 w-8 text-base border-none bg-orange-300 rounded-r-md rounded-tl-md">
+            <button className="items-center justify-center text-sm sm:font-bold h-6 w-6 sm:text-base border-none bg-orange-300 rounded-r-sm rounded-tl-sm">
               {ratings}
             </button>
-            <span className="text-orange-400">
+            <span className="text-sm text-orange-400 cursor-none">
               {ratings > 4 ? '★★★★☆' : '★★★☆☆'}
             </span>
           </div>
           <div className="mt-1.5">
             {i18nText && <span className={typeStyle}>{i18nText}</span>}
           </div>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1 sm:gap-1.5">
             {creator && `${t('Info.Author', { ns: 'product' })}: ${creator}`}
             <br />
             <StockLayout />
             {price} TWD
           </div>
           <button
-            className="border-none rounded-sm p-1.5 bg-[#ff7f50] no-underline cursor-pointer hover:bg-yellow-300 disabled:cursor-not-allowed"
+            className="border-none w-20 h-auto text-sm rounded-sm p-1.5 bg-[#ff7f50] no-underline cursor-pointer hover:bg-yellow-300 disabled:cursor-not-allowed"
             onClick={handleClick}
             disabled={stock === 0}
           >
@@ -163,12 +175,12 @@ const ProductLayout = ({ props }: { props: IData }) => {
       <hr />
       <div className="flex flex-col">
         <div className="flex flex-col gap-1.5">
-          <h3 className="text-xl font-bold">
+          <h3 className="text-sm sm:text-base font-medium sm:text-xl sm:font-bold">
             {t('Info.Desc', { ns: 'product' })}
           </h3>
-          {description}
+          <p className="text-sm text-center">{description}</p>
           <hr />
-          <h3 className="text-xl font-bold">
+          <h3 className="text-sm sm:text-base font-medium sm:text-xl sm:font-bold">
             {t('Info.Title', { ns: 'product' })}
           </h3>
           <ProductSpec props={productInfo} />
@@ -180,7 +192,7 @@ const ProductLayout = ({ props }: { props: IData }) => {
               <div className="text-xl">
                 <h4>{t('Info.RelatedItems', { ns: 'product' })}</h4>
               </div>
-              <div className="grid h-75 grid-cols-3 text-base">
+              <div className="grid h-auto grid-cols-1 sm:grid-cols-3 text-sm sm:text-base">
                 <div className="flex gap-1.5">
                   {arr.map((item) => (
                     <RelatedItemList key={item.id} dataInfo={item} />

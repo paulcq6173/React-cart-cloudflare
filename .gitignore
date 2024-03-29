@@ -31,4 +31,4 @@ functions
 
 # wrangler
 .wrangler
-wrangler.toml
+wrangler.*

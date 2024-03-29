@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-interface IParams {
+export interface IParams {
   key: unknown;
   dataDetail: {
     id: number;
@@ -30,15 +30,15 @@ const SearchList = ({ dataDetail }: IParams) => {
   return (
     <div className="h-fit w-200 flex items-center gap-4 border border-slate-200 rounded-md pl-4 shadow-lg">
       <img
-        className="h-60 w-48 m-1 object-cover rounded-md"
+        className="w-24 h-32 lg:h-60 lg:w-48 m-1 object-cover rounded-md"
         src={dataDetail.image}
         alt=""
       />
-      <div className="pt-2.5 w-[505px] h-100">
-        <div className="h-fit flex flex-col">
+      <div className="pt-2.5 w-screen h-auto lg:w-[505px]">
+        <div className="max-w-[360px] sm:max-w-[640px] lg:w-full h-fit grid grid-cols-1">
           {dataDetail.title}
-          <div className="flex flex-col h-24 gap-1.5">
-            <span className="flex text-yellow-500">
+          <div className="flex flex-col h-12 gap-0.5 sm:h-24 sm:gap-1.5">
+            <span className="flex text-yellow-600">
               <button className="h-8 w-8 flex border-none items-center justify-center text-white text-base font-bold bg-orange-300 rounded-r-lg rounded-tl-lg">
                 {ratings}
               </button>
@@ -52,7 +52,7 @@ const SearchList = ({ dataDetail }: IParams) => {
         </div>
         <div className="infoDes">
           <div className="mt-2 flex justify-between items-end">
-            <div className="border-slate-200 pt-4 pr-1 text-base">
+            <div className="border-slate-200 pt-4 pr-1 text-sm sm:text-base">
               <h3>
                 {creator &&
                   t('Author', { ns: 'searchResult' }) + ': ' + creator}
@@ -81,7 +81,7 @@ const SearchList = ({ dataDetail }: IParams) => {
                 {t('ListPrice', { ns: 'searchResult' })}:{' '}
                 {discount > 0 ? <del>{listprice}</del> : listprice} TWD
               </span>
-              <span className="flex justify-end text-base font-medium">
+              <span className="flex justify-end text-sm sm:text-base font-medium">
                 {Math.floor((listprice * (100 - discount)) / 100)} TWD
                 {discount > 0 ? (
                   <p className="w-20 h-8 items-center text-white text-xs p-1 border-none bg-red-400">
@@ -92,7 +92,7 @@ const SearchList = ({ dataDetail }: IParams) => {
                 )}
               </span>
               <Link to={`/products/${dataDetail.gtin}`}>
-                <button className="mt-2.5 w-28 text-base text-white text-center border-none bg-[#FF8E04] rounded cursor-pointer hover:bg-[#CE7201]">
+                <button className="mt-2.5 w-16 text-sm sm:w-28 sm:text-base text-white text-center border-none bg-[#FF8E04] rounded cursor-pointer hover:bg-[#CE7201]">
                   {t('CheckDetail', { ns: 'searchResult' })}
                 </button>
               </Link>

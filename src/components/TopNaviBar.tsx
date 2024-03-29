@@ -1,11 +1,11 @@
+import { resetCart } from '@/reducers/cartSlice';
 import { useAppSelector } from '@/reducers/reduxHooks';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectUser, userLogin, userLogout } from '../reducers/loginSlice';
+import { selectUser, userLogout } from '../reducers/loginSlice';
 import SearchBar from './sub-components/SearchBar';
 import Locales from './sub-components/dropdown/Locales';
 
@@ -47,19 +47,10 @@ const TopNaviBar = () => {
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem('cartItems');
-    localStorage.removeItem('loggedUser');
+    window.localStorage.clear();
+    dispatch(resetCart());
     dispatch(userLogout());
   };
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser');
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      //blogService.setToken(user.token);
-      dispatch(userLogin(user));
-    }
-  }, [dispatch]);
 
   return (
     <div className="flex space-x-4 bg-teal-800 w-full h-10 items-center">

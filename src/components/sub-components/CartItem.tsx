@@ -1,6 +1,9 @@
-import { deleteItem, selectCart, updateCart } from '@/reducers/cartSlice';
+import Notification from '@/components/Notification';
+import { deleteItem, selectCart, updateItemQty } from '@/reducers/cartSlice';
+import { resetMessage, setMessage } from '@/reducers/notifySlice';
 import { useAppDispatch, useAppSelector } from '@/reducers/reduxHooks';
-import React, { useState } from 'react';
+import productService from '@/services/productService';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IParams {
@@ -11,42 +14,63 @@ interface IParams {
     price: number;
     quantity: number;
   };
-  stock: number;
 }
 
-const CartItem = ({ obj, stock }: IParams) => {
+const CartItem = ({ obj }: IParams) => {
   const { t } = useTranslation();
-  const cart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-  const [err, setErr] = useState('');
+  const cart = useAppSelector(selectCart);
   const regex = /^[0-9\b]+$/; // exclude char.
-  const reqGTIN = obj.gtin;
-  const foundItem = cart.find((e) => e.gtin === reqGTIN);
-  const itemPrice = Math.floor(obj.price);
+  const { gtin, price } = obj;
+  let stock = 0;
+  productService.getProductById(gtin).then((data) => {
+    stock = data.stock;
+  });
+  // Because 1.0 + 1.0 + 1.0 !== 3.0
+  const itemPrice = Math.floor(price);
+  const foundItem = cart.find((e) => e.gtin === gtin);
+  // useState will cause referanceError due to loaded before initialization
   let qty: number = foundItem?.quantity ? foundItem.quantity : 1;
+
+  const handleQtyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value !== '' || regex.test(value)) {
+      qty = Number(value);
+    }
+  };
 
   const handleEditQTY = (e: React.FormEvent) => {
     e.preventDefault();
     if (foundItem) {
       if (qty <= stock) {
-        setErr('');
-        dispatch(updateCart({ ...foundItem, quantity: qty }));
+        dispatch(updateItemQty({ ...foundItem, quantity: qty }));
       } else {
         qty = stock;
-        setErr(
-          `We're sorry, this item stock:${stock} less than you requested quantity.`
-        );
+        const message = t('Error.SryNoEnoughStock', { ns: 'cart' });
+        dispatch(setMessage({ message, success: false }));
+        setTimeout(() => {
+          dispatch(resetMessage());
+        }, 5000);
       }
     } else {
-      setErr("Sorry, item doesn't exist.");
+      const message = t('Error.SryItemNotExist', { ns: 'cart' });
+      dispatch(setMessage({ message, success: false }));
+      setTimeout(() => {
+        dispatch(resetMessage());
+      }, 5000);
     }
   };
+
   const handleDelete = (e: React.FormEvent) => {
     e.preventDefault();
     if (foundItem) {
-      dispatch(deleteItem(reqGTIN));
+      dispatch(deleteItem(gtin));
     } else {
-      setErr("Sorry, the item that you requested to delete doesn't exist.");
+      const message = t('Error.SryItemNotExist', { ns: 'cart' });
+      dispatch(setMessage({ message, success: false }));
+      setTimeout(() => {
+        dispatch(resetMessage());
+      }, 5000);
     }
   };
 
@@ -62,29 +86,25 @@ const CartItem = ({ obj, stock }: IParams) => {
               <div className="flex gap-1.5">
                 <input
                   type="number"
-                  min="0"
-                  className="w-24"
-                  placeholder={`${qty}`}
-                  onChange={(e) => {
-                    if (e.target.value === '' || regex.test(e.target.value)) {
-                      qty = Number(e.target.value);
-                    }
-                  }}
+                  min="1"
+                  className="w-24 border-1 rounded-sm"
+                  placeholder={String(qty)}
+                  onChange={handleQtyChange}
                 />
                 <button
-                  className="w-24 border-none rounded-sm bg-[#ff7f50] cursor-pointer hover:text-red-950 hover:bg-red-400"
+                  className="w-20 border-none rounded-sm bg-[#ff7f50] cursor-pointer hover:text-white hover:bg-red-400"
                   onClick={handleEditQTY}
                 >
-                  {t('Update')}
+                  {t('Update', { ns: 'cart' })}
                 </button>
                 <button
-                  className="w-24 border-none rounded-sm bg-[#ff7f50] cursor-pointer hover:text-red-950 hover:bg-red-400"
+                  className="w-20 border-none rounded-sm bg-[#ff7f50] cursor-pointer hover:text-white hover:bg-red-400"
                   onClick={handleDelete}
                 >
-                  {t('Delete')}
+                  {t('Delete', { ns: 'cart' })}
                 </button>
               </div>
-              {err && <span className="text-red-600">{err}</span>}
+              <Notification />
             </div>
           </div>
         </div>

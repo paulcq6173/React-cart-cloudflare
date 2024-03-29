@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { PopularItemSkeleton } from './Skeleton';
 
-interface IParams {
+export interface IParams {
   dataArray: {
     gtin: string;
     title: string;
@@ -34,7 +34,7 @@ const PopularProduct = ({ dataArray, loading }: IParams) => {
                 <div className="text-base w-40 mb-0.5">
                   <div className="title">{t(`${item.title}`)}</div>
                   <div className="font-medium top-2 right-0">
-                    {item.listprice.toLocaleString()} NTD
+                    {item.listprice.toLocaleString()} TWD
                   </div>
                   <div className="flex text-center">
                     <button className="flex justify-center text-sm font-bold text-white w-5 h-5 border-none rounded-sm bg-lime-900">

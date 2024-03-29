@@ -1,4 +1,5 @@
 import MobileHome from '@/mobile/pages/MobileHome';
+import MobileProductDetails from '@/mobile/pages/MobileProductDetails';
 import Cart from '@/pages/Cart';
 import Event from '@/pages/Event';
 import Home from '@/pages/Home';
@@ -19,6 +20,8 @@ const RoutesLayout = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/mobile" element={<MobileHome />} />
+      <Route path="/mobile/products/search" element={<SearchResult />} />
+      <Route path="/mobile/products/:id" element={<MobileProductDetails />} />
     </Routes>
   );
 };

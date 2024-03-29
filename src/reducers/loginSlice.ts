@@ -1,7 +1,8 @@
+import localStorageHelper from '@/utils/localStorageHelper';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
-type TUser = {
+export type TUser = {
   userId: string;
   username: string;
   token: string;
@@ -10,15 +11,13 @@ type TUser = {
 // Define a type for the slice state
 interface IUserState {
   user: TUser | null;
-  loading: boolean;
-  error: number | null;
 }
 
-const initialState: IUserState = {
+const initialValue: IUserState = {
   user: null,
-  loading: false,
-  error: null,
 };
+const initialState: IUserState =
+  localStorageHelper.loadStorage('loggedUser') ?? initialValue;
 
 const loginSlice = createSlice({
   name: 'login', // combination reducer name
@@ -27,7 +26,7 @@ const loginSlice = createSlice({
     userLogin(state, action: PayloadAction<TUser>) {
       return { ...state, user: action.payload };
     },
-    userLogout: () => initialState,
+    userLogout: () => initialValue,
   },
 });
 

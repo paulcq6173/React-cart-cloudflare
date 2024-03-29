@@ -9,10 +9,13 @@ import orderService from '@/services/orderService';
 import { IOrderData } from '@/utils/types';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const PriceCalculator = (items: ICartState[]) => {
-  return items.reduce((count, item) => (count = count + item.price), 0);
+  return items.reduce(
+    (count, item) => (count = count + item.quantity * item.price),
+    0
+  );
 };
 
 /**
@@ -21,19 +24,17 @@ const PriceCalculator = (items: ICartState[]) => {
  */
 const Cart = () => {
   const { t } = useTranslation();
-  const locData = useLocation();
   const cart = useAppSelector(selectCart);
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
-  const stock = locData.state?.stockStatus;
   const uuid = user?.userId;
   const totalPrice = PriceCalculator(cart);
 
   /** build order */
+  // Avoid auto actived when rendering components.
+  const [active, setActive] = useState(false);
   // orderData - storing props that order required.
-  // useCreateOrder - Return order information that build success.
-  // handleSubmit - try build new order
   const [orderData, setOrderData] = useState<IOrderData>({
     userId: uuid,
     purchaseItems: [],
@@ -45,20 +46,26 @@ const Cart = () => {
     note: '',
   });
 
-  /** use hook to create order */
-  // Avoid auto actived when rendering components.
-  const [active, setActive] = useState(false);
-  //const { order } = useCreateOrder('/order', orderData, active);
-
   if (!user) {
-    navigator('/login', {
-      state: { message: t('Error.UserIsNull', { ns: 'cart' }), success: false },
-    });
+    navigator('/login');
     return;
   }
 
-  const leng: number = cart.length;
-  const stringItem: string = (leng === 1 && `${leng} item`) || `${leng} items`;
+  const SubTotal = () => {
+    let count: number = 0;
+    cart.forEach((e) => (count += e.quantity));
+
+    let stringItem = `${count} ${t('Item', { ns: 'cart' })}`;
+    if (count > 1) {
+      stringItem = `${count} ${t('Items', { ns: 'cart' })}`;
+    }
+
+    return (
+      <div>
+        {t('SubTotal', { ns: 'cart' })} ({stringItem}) : {totalPrice} TWD
+      </div>
+    );
+  };
 
   /** Check If anything out of stock or doesn't exist */
   //const { data, error } = ItemStatus(itemArr);
@@ -79,22 +86,19 @@ const Cart = () => {
       if (user) {
         setOrderData((item) => ({ ...item, purchaseItems: itemArr }));
 
-        console.log(`itemArr:`, itemArr);
-
         if (window.confirm(t('CheckoutConfirm', { ns: 'cart' }))) {
           setActive(true);
           const data = await orderService.create(orderData);
-          const { message } = data;
 
           if (data.status === 200) {
-            const mes = `${message} Redirect to homepage in 5 sec.`;
-            dispatch(setMessage({ message: mes }));
+            dispatch(setMessage({ message: t('OrderSuccess') }));
             setTimeout(() => {
               resetMessage();
             }, 3000);
 
             setTimeout(() => navigator('/'), 5000);
           } else {
+            const { message } = data;
             dispatch(setMessage({ message, success: false }));
             setTimeout(() => {
               resetMessage();
@@ -126,7 +130,7 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-200">
       <TopNaviBar />
       <div className="w-[1080px] pt-0 pr-1.5 m-auto border border-gray-200 rounded-md bg-yellow-100">
         <span>
@@ -142,25 +146,30 @@ const Cart = () => {
           <h3>{t('MyShoppingCart', { ns: 'cart' })}</h3>
           <hr />
         </div>
-        <div className="w-[800px]">
+        <div className="w-[800px] gap-1">
           {cart.length === 0 ? (
             <div>{t('EmptyCart', { ns: 'cart' })}</div>
           ) : (
-            cart.map((item, index) => (
-              <CartItem key={index} obj={item} stock={stock} />
-            ))
+            cart.map((item, index) => <CartItem key={index} obj={item} />)
           )}
           <hr />
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-1">
             <button
               type="submit"
-              className="w-36 border border-amber-600 rounded-md bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200 disabled:cursor-not-allowed disabled:text-gray-600 disabled:bg-yellow-200"
+              className="w-28 border border-amber-600 rounded-md bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200 disabled:cursor-not-allowed disabled:text-gray-600 disabled:bg-yellow-200"
               onClick={handleSubmit}
               disabled={cart.length === 0 || active}
             >
               {t('CheckOut')}
             </button>
-            {t('SubTotal')} ({stringItem}) : {totalPrice} TWD
+            <Link
+              type="submit"
+              className="w-28 border border-amber-600 rounded-md text-center bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200"
+              to="/products/search"
+            >
+              {t('GoShopping', { ns: 'cart' })}
+            </Link>
+            <SubTotal />
           </div>
         </div>
       </div>

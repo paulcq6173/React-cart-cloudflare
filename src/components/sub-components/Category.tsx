@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import useFetch from '../../hooks/useFetch';
 import { CategorySkeleton } from './Skeleton';
 
-interface IDataArrayElement {
+export interface IDataArrayElement {
   dataArray: {
     id: number;
     genre: string;

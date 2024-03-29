@@ -11,6 +11,7 @@
     "RegisterTitle":"Sign Up",
     "RegisterBTN":"Register",
     "AlreadyHaveAccTip":"Already have an account?",
+    "RegisterSuccess":"Register succeeded, you can login now.",
     "Error":{
         "RegBlankContent":"Username, email and password cannot be blank",
         "RegAlreadyUsed":"Account or e-mail already used",
@@ -28,18 +29,21 @@
         "QTY":"QTY:"
     },
     "Genre":{
+        "Politics":"Politics",
         "Philosophy":"Philosophy",
         "Psychology":"Psychology"
     },
     "Type":{
         "ComputerScience":"Computer Science",
+        "Politics":"Politics",
         "Philosophy":"Philosophy",
         "Psychology":"Psychology",
         "Action":"Action",
         "RPG":"RPG",
-        "HorrorFiction":"Horror fiction",
+        "Horror fiction":"Horror fiction",
         "Horror":"Horror",
         "Fiction":"Fiction",
+        "Figure":"Figure",
         "Blu-ray":"Blu-ray"
     },
     "Format":{
@@ -70,5 +74,8 @@
     "NaturalSciences": "Natural\nSciences",
     "ComputerScience": "Computer\nScience",
     "SeeMore":"See more",
+    "PopularItem":"Popular Item",
+    "ToPCHome":"Switch Pc ver",
+    "ListPrice":"List price",
     "Dummy":"Dummy"
 }

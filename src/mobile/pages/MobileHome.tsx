@@ -1,11 +1,15 @@
 import TopNavBar from '@/mobile/components/MobileTopNav';
+import HomeLayout from '@/mobile/components/layout/MobileHomeLayout';
 
 const Home = () => {
   return (
-    <div className="w-screen max-w-[360px] sm:max-w-[640px] flex flex-col justify-center">
+    <div className="w-screen sm:max-w-[640px] flex flex-col justify-center">
       <TopNavBar />
-      <div className="bg-teal-800">
-        <p>Mobile RWD Test</p>
+      <div className="w-screen bg-pink-400 flex justify-center">
+        <img src="images/eventSpringBanner.png" className="h-auto" />
+      </div>
+      <div className="w-full bg-teal-800">
+        <HomeLayout />
       </div>
     </div>
   );

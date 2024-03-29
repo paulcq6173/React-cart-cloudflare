@@ -11,6 +11,7 @@
     "RegisterTitle":"註冊帳號",
     "RegisterBTN":"註冊",
     "AlreadyHaveAccTip":"已有帳號？",
+    "RegisterSuccess":"註冊成功，您現在可以登入。",
     "Error":{
         "RegBlankContent":"欄位不能空白。",
         "RegAlreadyUsed":"帳號或電子信箱已註冊。",
@@ -28,18 +29,21 @@
         "QTY":"數量："
     },
     "Genre":{
+        "Politics":"政治學",
         "Philosophy":"哲學",
         "Psychology":"心理學"
     },
     "Type":{
         "ComputerScience":"計算機科學",
+        "Politics":"政治學",
         "Philosophy":"哲學",
         "Psychology":"心理學",
         "Action":"動作類",
         "RPG":"角色扮演類",
-        "HorrorFiction":"驚悚虛構",
+        "Horror fiction":"虛構驚悚",
         "Horror":"驚悚",
         "Fiction":"虛構",
+        "Figure":"模型",
         "Blu-ray":"藍光"
     },
     "Format":{
@@ -70,5 +74,8 @@
     "NaturalSciences": "自然科學",
     "ComputerScience": "計算機科學",
     "SeeMore":"前往瀏覽",
+    "PopularItem":"熱門商品",
+    "ToPCHome":"切換電腦版頁面",
+    "ListPrice":"定價",
     "Dummy":"Dummy"
 }

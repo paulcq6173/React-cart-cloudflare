@@ -1,4 +1,6 @@
+import localStorageHelper from '@/utils/localStorageHelper';
 import { configureStore } from '@reduxjs/toolkit';
+import throttle from 'lodash/throttle';
 import cartSlice from './cartSlice';
 import filterSlice from './filterSlice';
 import loginSlice from './loginSlice';
@@ -17,6 +19,16 @@ export const store = configureStore({
     cart: cartSlice,
   },
 });
+
+// Lodash.throttle - avoid execute more often in short time.
+store.subscribe(
+  throttle(() => {
+    const cart = store.getState().cart;
+    localStorageHelper.saveStorage(cart);
+
+    // Only execute one time in specified millisec.
+  }, 1000)
+);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

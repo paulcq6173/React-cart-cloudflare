@@ -65,7 +65,8 @@ const RegisterForm = () => {
           return;
       }
 
-      navigate('/login', response);
+      const { message } = response;
+      navigate('/login', { state: { message, success: true } });
     } catch (error: unknown) {
       const { message } = errorHelper(error);
       dispatch(setMessage({ message, success: false }));

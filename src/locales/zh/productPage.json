@@ -13,6 +13,7 @@
         "Print length":"裝訂頁數",
         "ReleaseDate":"首次發行日",
         "Lang":"語言",
+        "Publisher":"出版商",
         "Manufacturer":"製造商",
         "Studio":"片商"
     }
