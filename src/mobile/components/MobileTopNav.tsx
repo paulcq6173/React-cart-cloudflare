@@ -1,10 +1,9 @@
-import Collapsible from '@/mobile/components/Collapsible';
+import MobileSearchBar from '@/mobile/components/sub-components/MobileSearchBar';
 import { selectUser, userLogout } from '@/reducers/loginSlice';
 import { useAppDispatch, useAppSelector } from '@/reducers/reduxHooks';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import MobileCollapsedSideBar from './sub-components/MobileCollapsedSideBar';
 
 const TopNav = () => {
   const { t } = useTranslation();
@@ -59,47 +58,9 @@ const TopNav = () => {
           <img className="w-8 h-5" src="/images/EmeraldGardenBanner.png" />
         </Link>
         <WithLoginButton />
-        <Collapsible>
-          <Link
-            className="block h-5 sm:h-8 text-white text-sm sm:text-xl bg-teal-700 no-underline hover:bg-orange-400"
-            to="/mobile"
-          >
-            {t('Home')}
-          </Link>
-          <Link
-            className="block text-white text-sm bg-teal-400 no-underline text-base hover:bg-orange-400"
-            to="/mobile"
-          >
-            {t('PopularItem')}
-          </Link>
-          <Link
-            className="block text-white text-sm bg-teal-400 no-underline text-base hover:bg-orange-400"
-            to="/mobile"
-          >
-            {t('Contact')}
-          </Link>
-          <Link
-            className="block text-white text-sm bg-teal-400 no-underline text-base hover:bg-orange-400"
-            to="/"
-          >
-            {t('ToPCHome')}
-          </Link>
-        </Collapsible>
+        <MobileCollapsedSideBar />
       </div>
-      <div className="flex gap-0.5 justify-center">
-        <span className="w-screen ml-1 mr-1 flex justify-center">
-          <input
-            className="w-40 sm:w-48 md:w-2/3 outline-none border-2 border-transparent rounded-sm focus:border-orange-600"
-            placeholder="keyword"
-          />
-          <Link
-            to="/mobile/products/search"
-            className="w-5 flex items-center rounded-sm text-white bg-orange-400"
-          >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </Link>
-        </span>
-      </div>
+      <MobileSearchBar />
       <div className="flex justify-start text-sm text-white bg-teal-950">
         <Link to="/mobile/products/search">Hot</Link>
       </div>

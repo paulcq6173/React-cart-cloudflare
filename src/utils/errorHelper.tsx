@@ -1,8 +1,20 @@
-export const errorHandler = (error: unknown) => {
+import { resetMessage, setMessage } from '@/reducers/notifySlice';
+import { useAppDispatch } from '@/reducers/reduxHooks';
+
+export const ErrorHandler = (error: unknown) => {
+  const dispatch = useAppDispatch();
+
   if (error instanceof Error) {
-    return { message: 'Error occurs when process running', status: 400 };
+    dispatch(setMessage({ message: error.message }));
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 5000);
   }
-  return { message: 'Unexpected Error occurs', status: 500 };
+  dispatch(setMessage({ message: 'Unexpected Error occured' }));
+  setTimeout(() => {
+    dispatch(resetMessage());
+  }, 5000);
+
   /*if (axios.isAxiosError(error))  {
         const { request, response } = error;
         if (response) {
@@ -24,4 +36,4 @@ export const errorHandler = (error: unknown) => {
     }*/
 };
 
-export default errorHandler;
+export default ErrorHandler;

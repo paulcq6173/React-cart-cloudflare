@@ -120,14 +120,13 @@ const ProductLayout = ({ props }: { props: IData }) => {
       navigate('/login', {
         state: {
           message: t('LoginRequired'),
-          success: true,
         },
       });
     }
   };
 
   return (
-    <div className="bg-white m-auto w-3/4 h-auto flex flex-col justify-center">
+    <div className="bg-white m-auto w-3/4 h-auto flex flex-col">
       <div className="flex pt-12 justify-center gap-2.5 mb-2">
         <div className="h-64 w-auto">
           <img src={image} alt="" className="h-64 w-50" />

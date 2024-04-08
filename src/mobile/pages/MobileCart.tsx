@@ -1,15 +1,15 @@
 import Notification from '@/components/Notification';
-import TopNaviBar from '@/components/TopNaviBar';
-import CartItem from '@/components/sub-components/CartItem';
+import MobileTopNavBar from '@/mobile/components/MobileTopNav';
 import { ICartState, selectCart } from '@/reducers/cartSlice';
 import { selectUser } from '@/reducers/loginSlice';
 import { resetMessage, setMessage } from '@/reducers/notifySlice';
 import { useAppDispatch, useAppSelector } from '@/reducers/reduxHooks';
 import orderService from '@/services/orderService';
-import { IArrProps, IOrderData } from '@/utils/types';
+import { IOrderData } from '@/utils/types';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, redirect, useNavigate } from 'react-router-dom';
+import MobileCartItem from '../components/sub-components/MobileCartItem';
 
 const PriceCalculator = (items: ICartState[]) => {
   return items.reduce(
@@ -22,7 +22,7 @@ const PriceCalculator = (items: ICartState[]) => {
  * Shopping Cart process.
  *
  */
-const Cart = () => {
+const MobileCart = () => {
   const { t } = useTranslation();
   const cart = useAppSelector(selectCart);
   const user = useAppSelector(selectUser);
@@ -47,7 +47,7 @@ const Cart = () => {
   });
 
   if (!user) {
-    redirect('/login');
+    redirect('/mobile/login');
     return;
   }
 
@@ -74,7 +74,7 @@ const Cart = () => {
     if (active) {
       return;
     }
-    const itemArr: IArrProps[] = cart.map((e) => {
+    const itemArr = cart.map((e) => {
       return {
         gtin: e.gtin,
         name: e.name,
@@ -98,7 +98,7 @@ const Cart = () => {
               resetMessage();
             }, 3000);
 
-            setTimeout(() => navigator('/'), 5000);
+            setTimeout(() => navigator('/mobile'), 5000);
           } else {
             const { message } = data;
             dispatch(setMessage({ message, success: false }));
@@ -132,46 +132,45 @@ const Cart = () => {
   };
 
   return (
-    <div className="bg-gray-200">
-      <TopNaviBar />
-      <div className="w-[1080px] pt-0 pr-1.5 m-auto border border-gray-200 rounded-md bg-yellow-100">
-        <span>
-          <h1 className="font-extrabold">Message</h1>
+    <div className="w-screen bg-gray-200">
+      <MobileTopNavBar />
+      <div className="w-11/12 m-auto border border-black rounded-md bg-yellow-100">
+        <span className="text-sm sm:text-base">
+          <h1 className="text-base sm:text-xl font-bold">Message</h1>
           Dear customer, we're appreciated that you choose our site.
           <br />
           If you have any questions, please use help service.
         </span>
         <Notification />
       </div>
-      <div className="w-[1080px] m-auto flex flex-col">
-        <div className="align-center">
+      <div className="w-screen p-1 flex flex-col">
+        <div className="font-bold align-center">
           <h3>{t('MyShoppingCart', { ns: 'cart' })}</h3>
           <hr />
         </div>
-        <div className="w-[800px] gap-1">
-          {cart.length === 0 ? (
-            <div>{t('EmptyCart', { ns: 'cart' })}</div>
-          ) : (
-            cart.map((item, index) => <CartItem key={index} obj={item} />)
-          )}
-          <hr />
-          <div className="flex justify-between mt-1">
+        {cart.length === 0 ? (
+          <div>{t('EmptyCart', { ns: 'cart' })}</div>
+        ) : (
+          cart.map((item, index) => <MobileCartItem key={index} obj={item} />)
+        )}
+        <hr className="w-11/12" />
+        <div className="w-screen grid grid-cols-1 mt-1">
+          <SubTotal />
+          <div className="flex space-x-2">
             <button
               type="submit"
-              className="w-28 border border-amber-600 rounded-md bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200 disabled:cursor-not-allowed disabled:text-gray-600 disabled:bg-yellow-200"
+              className="w-20 text-sm sm:w-24 sm:text-base border border-amber-600 rounded-md bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200 disabled:cursor-not-allowed disabled:text-gray-600 disabled:bg-yellow-200"
               onClick={handleSubmit}
               disabled={cart.length === 0 || active}
             >
               {t('CheckOut')}
             </button>
             <Link
-              type="submit"
-              className="w-28 border border-amber-600 rounded-md text-center bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200"
-              to="/products/search"
+              className="w-28 text-sm sm:w-36 sm:text-base border border-amber-600 rounded-md text-center bg-amber-400 cursor-pointer hover:text-amber-400 hover:bg-yellow-200"
+              to="/mobile/products/search"
             >
               {t('GoShopping', { ns: 'cart' })}
             </Link>
-            <SubTotal />
           </div>
         </div>
       </div>
@@ -179,4 +178,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default MobileCart;

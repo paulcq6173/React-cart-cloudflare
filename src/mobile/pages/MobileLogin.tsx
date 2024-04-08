@@ -1,9 +1,9 @@
-import TopNaviBar from '@/components/TopNaviBar';
-import LoginForm from '@/components/forms/LoginForm';
+import MobileTopNavBar from '@/mobile/components/MobileTopNav';
 import { resetMessage, setMessage } from '@/reducers/notifySlice';
 import { useAppDispatch } from '@/reducers/reduxHooks';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import MobileLoginForm from '../components/forms/MobileLoginForm';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ const Login = () => {
     if (loc.state.success) {
       dispatch(setMessage({ message: t(`${message}`), success: true }));
     } else {
-      dispatch(setMessage({ message, success: false }));
+      dispatch(setMessage({ message }));
     }
     setTimeout(() => {
       dispatch(resetMessage());
@@ -24,8 +24,8 @@ const Login = () => {
 
   return (
     <div>
-      <TopNaviBar />
-      <LoginForm />
+      <MobileTopNavBar />
+      <MobileLoginForm />
     </div>
   );
 };

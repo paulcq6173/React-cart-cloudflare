@@ -115,19 +115,18 @@ const ProductLayout = ({ props }: { props: IData }) => {
         dispatch(addCartItem(newObj));
       }
 
-      navigate('/cart');
+      navigate('/mobile/cart');
     } else {
-      navigate('/login', {
+      navigate('/mobile/login', {
         state: {
           message: t('LoginRequired'),
-          success: true,
         },
       });
     }
   };
 
   return (
-    <div className="w-screen m-auto w-3/4 h-auto flex flex-col justify-center">
+    <div className="w-screen m-auto w-11/12 h-auto flex flex-col justify-center">
       <button className="mt-1 ml-1 flex w-16 justify-start text-sm font-medium bg-green-600 rounded-sm text-white focus:bg-lime-400 focus:text-black">
         <Link
           className="flex w-full justify-center text-center"
@@ -192,8 +191,8 @@ const ProductLayout = ({ props }: { props: IData }) => {
               <div className="text-xl">
                 <h4>{t('Info.RelatedItems', { ns: 'product' })}</h4>
               </div>
-              <div className="grid h-auto grid-cols-1 sm:grid-cols-3 text-sm sm:text-base">
-                <div className="flex gap-1.5">
+              <div className="h-auto">
+                <div className="flex flex-col space-y-0.5">
                   {arr.map((item) => (
                     <RelatedItemList key={item.id} dataInfo={item} />
                   ))}

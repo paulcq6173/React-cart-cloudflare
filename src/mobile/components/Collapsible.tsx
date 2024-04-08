@@ -36,20 +36,19 @@ const Collapsible = (props: { children: ReactNode }) => {
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
-      {open && (
-        <div
-          id="mySidepanel"
-          className="fixed w-24 h-96 z-1 top-0 right-0 text-sm text-black overflow-x-hidden transition duration-300 bg-gray-200"
+      <div
+        className={`fixed w-28 h-96 z-1 top-0 right-0 text-sm text-black overflow-x-hidden transition ease-in-out duration-300 bg-gray-200 opacity-95 ${
+          open ? 'translate-x-0' : 'translate-x-28'
+        }`}
+      >
+        <button
+          className="absolute w-5 h-5 text-md sm:w-8 sm:h-8 sm:text-xl text-white mt-0 top-0 right-0 bg-teal-800"
+          onClick={handleToggle}
         >
-          <button
-            className="absolute w-5 h-5 text-md sm:w-8 sm:h-8 sm:text-xl text-white mt-0 top-0 right-0 bg-teal-800"
-            onClick={handleToggle}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-          <div>{props.children}</div>
-        </div>
-      )}
+          <FontAwesomeIcon icon={faXmark} />
+        </button>
+        <div>{props.children}</div>
+      </div>
     </div>
   );
 };

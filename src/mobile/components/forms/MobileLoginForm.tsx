@@ -1,3 +1,4 @@
+import Notification from '@/components/Notification';
 import useLogin from '@/hooks/useLogin';
 import { userLogin } from '@/reducers/loginSlice';
 import { resetMessage, setMessage } from '@/reducers/notifySlice';
@@ -7,7 +8,6 @@ import ErrorHelper from '@/utils/errorHelper';
 import localStorageHelper from '@/utils/localStorageHelper';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import Notification from '../Notification';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -22,9 +22,10 @@ const LoginForm = () => {
       const response = await authService.login(loginHook.logindata);
 
       switch (response.status) {
-        case 200:
-          break;
-        default:
+        case 400:
+        case 404:
+        case 409:
+        case 500:
           dispatch(
             setMessage({
               message: t(`Error.${response.message}`),
@@ -51,8 +52,8 @@ const LoginForm = () => {
   return (
     <div className="flex justify-center items-center">
       <form onSubmit={submitLogin}>
-        <div className="w-96 mt-8 p-2.5 border border-solid border-slate-600 rounded-sm bg-gray-50">
-          <h3 className="mb-2 p-0 text-center text-xl font-bold">
+        <div className="w-screen mt-8 p-2.5 border border-solid border-gray-600 rounded-sm bg-gray-50">
+          <h3 className="mb-2 p-0 text-center text-base font-medium">
             {t('LoginTitle')}
           </h3>
           <div className="flex flex-col border-none gap-3.5">

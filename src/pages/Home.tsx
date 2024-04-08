@@ -1,6 +1,7 @@
+import Footer from '@/components/Footer';
 import Header from '../components/Header';
-import HomeLayout from '../components/layout/HomeLayout';
 import TopNaviBar from '../components/TopNaviBar';
+import HomeLayout from '../components/layout/HomeLayout';
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <TopNaviBar />
       <Header />
       <HomeLayout />
+      <Footer />
     </div>
   );
 };

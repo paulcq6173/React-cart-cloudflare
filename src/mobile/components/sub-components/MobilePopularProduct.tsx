@@ -17,11 +17,11 @@ const PopularProduct = ({ dataArray, loading }: IParams) => {
               to={`/mobile/products/${item.gtin}`}
               key={index}
             >
-              <div className="bg-white w-48 h-auto sm:w-56 sm:h-40 ml-1 flex">
+              <div className="flex bg-white w-11/12 m-auto sm:w-56 sm:h-40">
                 <img
                   src={item.image}
                   alt=""
-                  className="items-center w-24 h-28 sm:w-28 sm:h-32"
+                  className="items-center w-20 h-auto object-fit sm:w-28 sm:h-32"
                 />
                 <div className="w-28 sm:w-56 mb-0.5">
                   <div className="text-sm sm:text-base">

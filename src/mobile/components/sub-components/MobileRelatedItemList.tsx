@@ -7,22 +7,24 @@ interface IItemList {
 }
 
 const RelatedItemList = ({ dataInfo }: IItemList) => {
-  const NoData: boolean = dataInfo === undefined;
+  if (!dataInfo) {
+    return null;
+  }
 
   return (
-    <div className="flex">
-      {!NoData && (
-        <div className="w-28 h-32 sm:w-52 sm:h-60">
+    <div className="flex w-11/12 m-auto">
+      <div className="grid grid-cols-2">
+        <div className="cols-span-1">
           <img
-            className="w-24 h-32 sm:w-48 sm:h-52 object-contain"
+            className="object-cover p-1"
             src={dataInfo.img}
             alt="itemPhoto"
           />
-          <div className="text-sm sm:text-base text-center">
-            {dataInfo.name}
-          </div>
         </div>
-      )}
+        <div>
+          <h3 className="text-sm sm:text-base text-wrap">{dataInfo.name}</h3>
+        </div>
+      </div>
     </div>
   );
 };

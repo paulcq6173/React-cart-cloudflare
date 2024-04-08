@@ -1,20 +1,8 @@
+import { IDropdownProps } from '@/utils/types';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-interface IDropdownOption {
-  // Each child in a list should have a unique "key" prop.
-  id: number;
-  emoji: string;
-  label: string | number;
-  labelValue: 'EN' | 'zh-TW';
-}
-
-interface IDropdownProps {
-  locales?: IDropdownOption[];
-  placeHolder?: string;
-}
 
 function Locales({ placeHolder, locales }: IDropdownProps) {
   const { i18n } = useTranslation();

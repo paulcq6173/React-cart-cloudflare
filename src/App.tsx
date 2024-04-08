@@ -1,6 +1,5 @@
 import { userLogin } from '@/reducers/loginSlice';
 import { useEffect } from 'react';
-import Footer from './components/Footer';
 import RoutesLayout from './components/layout/RoutesLayout';
 import './index.css';
 import { useAppDispatch } from './reducers/reduxHooks';
@@ -17,9 +16,8 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="w-full max-w-7xl flex flex-col space-y-4 justify-center">
+    <div className="w-full h-fit flex flex-col justify-center">
       <RoutesLayout />
-      <Footer />
     </div>
   );
 }

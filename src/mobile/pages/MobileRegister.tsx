@@ -1,6 +1,6 @@
-import TopNaviBar from '@/components/TopNaviBar';
-import RegisterForm from '@/components/forms/RegisterForm';
+import MobileTopNavBar from '@/mobile/components/MobileTopNav';
 import { useTranslation } from 'react-i18next';
+import MobileRegisterForm from '../components/forms/MobileRegisterForm';
 
 export const ErrMesI18N = (message: string) => {
   const { t } = useTranslation();
@@ -25,8 +25,8 @@ export const ErrMesI18N = (message: string) => {
 const Register = () => {
   return (
     <div className="registerContainer">
-      <TopNaviBar />
-      <RegisterForm />
+      <MobileTopNavBar />
+      <MobileRegisterForm />
     </div>
   );
 };

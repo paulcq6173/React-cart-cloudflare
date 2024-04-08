@@ -10,18 +10,20 @@ const SearchList = ({ dataDetail }: IParams) => {
   const styleStock = stock === 0 ? 'last:text-red-400' : 'last:text-green-400';
 
   return (
-    <div className="h-fit w-screen ml-1 w-[350px] sm:w-[630px] flex items-center gap-1 border border-slate-200 rounded-sm">
-      <img
-        className="w-20 h-28 ml-1 lg:h-60 lg:w-48 object-cover rounded-sm"
-        src={dataDetail.image}
-        alt=""
-      />
-      <div className="pt-2.5 lg:w-[505px]">
+    <div className="grid grid-cols-2 w-screen mb-2 border border-slate-200 rounded-sm sm:gap-1.5">
+      <div className="p-1 lg:h-60 lg:w-48">
+        <img
+          className="object-cover item-center rounded-sm"
+          src={dataDetail.image}
+          alt=""
+        />
+      </div>
+      <div className="col-span-1 p-1 ml-1">
         <div className="text-sm lg:w-full h-fit grid grid-cols-1">
-          {dataDetail.title}
+          <h3 className="w-24">{dataDetail.title}</h3>
           <div className="flex flex-col h-12 gap-0.5 sm:h-24 sm:gap-1.5">
-            <span className="flex text-yellow-500">
-              <button className="h-5 w-5 flex text-sm border-none items-center justify-center text-white sm:text-base sm:font-bold bg-orange-300 rounded-r-sm rounded-tl-sm">
+            <span className="flex text-yellow-500 text-sm sm:text-base sm:font-bold">
+              <button className="h-5 w-5 flex border-none items-center justify-center text-white bg-orange-300 rounded-r-sm rounded-tl-sm">
                 {ratings}
               </button>
               {ratings > 4 ? '★★★★☆' : '★★★☆☆'}
@@ -45,11 +47,11 @@ const SearchList = ({ dataDetail }: IParams) => {
         </div>
         <div className="mt-2 flex justify-start items-end">
           <div className="text-sm">
-            <span className="flex justify-end text-xs sm:text-base font-medium">
+            <span className="flex justify-start text-xs sm:text-base font-medium">
               {Math.floor((listprice * (100 - discount)) / 100)} TWD
             </span>
             <Link to={`/mobile/products/${dataDetail.gtin}`}>
-              <button className="mt-0.5 w-24 text-xs sm:w-28 sm:text-base text-white text-center border-none bg-[#FF8E04] rounded cursor-pointer hover:bg-red-400">
+              <button className="w-20 text-xs sm:text-base md:w-28 text-white text-center border-none bg-[#FF8E04] rounded cursor-pointer hover:bg-red-400">
                 {t('CheckDetail', { ns: 'searchResult' })}
               </button>
             </Link>

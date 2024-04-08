@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import TopNavBar from '@/mobile/components/MobileTopNav';
 import HomeLayout from '@/mobile/components/layout/MobileHomeLayout';
 
@@ -11,6 +12,7 @@ const Home = () => {
       <div className="w-full bg-teal-800">
         <HomeLayout />
       </div>
+      <Footer />
     </div>
   );
 };

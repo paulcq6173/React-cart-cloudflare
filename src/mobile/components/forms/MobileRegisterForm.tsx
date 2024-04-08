@@ -30,12 +30,14 @@ const RegisterForm = () => {
     border: notify.includes(t('Error.RegAlreadyUsed'))
       ? '2px solid red'
       : '1px solid grey',
+    boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
   };
 
   const chkPWStyle = {
     border: notify.includes(t('Error.PWNoMatch'))
       ? '2px solid red'
       : '1px solid grey',
+    boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
   };
 
   const handleCheckPassword = (e: { target: HTMLInputElement }) => {
@@ -80,7 +82,7 @@ const RegisterForm = () => {
       }
 
       const { message } = response;
-      navigate('/login', { state: { message, success: true } });
+      navigate('/mobile/login', { state: { message, success: true } });
     } catch (error: unknown) {
       ErrorHelper(error);
     }
@@ -97,8 +99,8 @@ const RegisterForm = () => {
   return (
     <div className="flex justify-center items-center">
       <form ref={formRef} onSubmit={handleSubmit}>
-        <div className="w-96 mt-8 p-2.5 border border-gray-600 rounded-sm bg-gray-50">
-          <h3 className="mb-2 p-0 text-center text-xl font-bold">
+        <div className="w-screen mt-8 p-2.5 border border-gray-600 rounded-sm bg-gray-50">
+          <h3 className="mb-2 p-0 text-center text-base font-medium">
             {t('RegisterTitle')}
           </h3>
           <div className="flex flex-col border-none gap-3.5">

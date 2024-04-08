@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import TopNaviBar from '@/components/TopNaviBar';
 import ProductLayout from '@/components/layout/ProductLayout';
 import productService from '@/services/productService';
@@ -23,7 +24,12 @@ const ProductDetails = () => {
   return (
     <div className="w-screen flex flex-col justify-center">
       <TopNaviBar />
-      {data ? <ProductLayout props={data} /> : <div>Page loading...</div>}
+      {data ? (
+        <ProductLayout props={data} />
+      ) : (
+        <div className="h-600px">Page loading...</div>
+      )}
+      <Footer />
     </div>
   );
 };

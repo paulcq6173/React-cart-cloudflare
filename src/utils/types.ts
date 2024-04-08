@@ -1,3 +1,16 @@
+interface IDropdownOption {
+  // Each child in a list should have a unique "key" prop.
+  id: number;
+  emoji: string;
+  label: string | number;
+  labelValue: 'EN' | 'zh-TW';
+}
+
+export interface IDropdownProps {
+  locales?: IDropdownOption[];
+  placeHolder?: string;
+}
+
 export interface IData {
   id: number;
   gtin: string;
@@ -20,6 +33,7 @@ export interface IData {
 
 export interface IArrProps {
   gtin: string;
+  name: string;
   quantity: number;
 }
 

@@ -12,7 +12,7 @@ const RelatedItemList = ({ dataInfo }: IItemList) => {
   return (
     <div className="flex">
       {!NoData && (
-        <div className="w-52 h-60">
+        <div className="w-52 h-auto">
           <img
             className="w-48 h-52 object-contain"
             src={dataInfo.img}

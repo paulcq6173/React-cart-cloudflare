@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import SearchList from '@/components/SearchList';
 import TopNaviBar from '@/components/TopNaviBar';
 import useFetch from '@/hooks/useFetch';
@@ -63,7 +64,7 @@ const SearchResult = () => {
   return (
     <div className="w-screen flex flex-col justify-center">
       {mobileMode ? <MobileTopNav /> : <TopNaviBar />}
-      <div className="w-full max-w-[360px] sm:max-w-[640px] lg:max-w-[1024px] lg:min-h-[600px] block m-auto">
+      <div className="w-full lg:max-w-[1024px] block m-auto">
         <div>
           <h3 className="text-sm sm:text-xl sm:font-bold">
             {keyword
@@ -83,7 +84,7 @@ const SearchResult = () => {
                 {`'${keyword}'`}
               </div>
             ) : (
-              <div>
+              <div className="items-center">
                 {loading ? (
                   <div>{t('SearchLoading', { ns: 'searchResult' })}</div>
                 ) : (
@@ -94,6 +95,7 @@ const SearchResult = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

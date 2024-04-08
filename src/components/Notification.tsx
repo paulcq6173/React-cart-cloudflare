@@ -10,7 +10,7 @@ const Notification = () => {
   }
 
   return (
-    <div className={success === false ? 'text-red-500' : 'text-green-500'}>
+    <div className={!success ? 'text-red-500' : 'text-green-500'}>
       {message}
     </div>
   );
