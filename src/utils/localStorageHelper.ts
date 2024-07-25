@@ -27,8 +27,9 @@ const saveUser = (user: TUser) => {
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
+    } else {
+      console.error('Unexpected error get caught.', error);
     }
-    console.error('Unexpected error get caught.', error);
   }
 };
 

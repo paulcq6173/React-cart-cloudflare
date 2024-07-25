@@ -32,6 +32,8 @@ const SearchBar = () => {
   const handleSearchSubmit = () => {
     if (searchKeyword) {
       dispatch(setKeyword(searchKeyword));
+    } else {
+      dispatch(setKeyword(''));
     }
 
     dispatch(setOption({ options: { category } }));
@@ -40,6 +42,8 @@ const SearchBar = () => {
       navigate('/products/search');
     }
   };
+
+  console.log('keyword:', searchKeyword);
 
   return (
     <div className="flex border-2 mt-0.5 text-center rounded border-transparent hover:border-orange-300 hover:rounded">
