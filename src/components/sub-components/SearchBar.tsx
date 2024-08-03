@@ -43,8 +43,6 @@ const SearchBar = () => {
     }
   };
 
-  console.log('keyword:', searchKeyword);
-
   return (
     <div className="flex border-2 mt-0.5 text-center rounded border-transparent hover:border-orange-300 hover:rounded">
       <SearchOptionBar options={productTypes} placeHolder={t(`${category}`)} />

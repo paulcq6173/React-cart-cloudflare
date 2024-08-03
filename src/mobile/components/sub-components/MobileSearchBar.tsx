@@ -22,6 +22,8 @@ const MobileSearchBar = () => {
   const handleSearchSubmit = () => {
     if (searchKeyword) {
       dispatch(setKeyword(searchKeyword));
+    } else {
+      dispatch(setKeyword(''));
     }
 
     if (category !== t('All') || searchKeyword) {

@@ -28,6 +28,7 @@ const verifyToken = async (token: FormDataEntryValue) => {
 
     result = await verifyRes.json();
   } catch (error: unknown) {
+    console.log('login failed');
     ErrorHandler(error);
   }
 

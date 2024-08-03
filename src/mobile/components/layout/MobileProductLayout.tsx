@@ -177,7 +177,7 @@ const ProductLayout = ({ props }: { props: IData }) => {
           <h3 className="text-sm sm:text-base font-medium sm:text-xl sm:font-bold">
             {t('Info.Desc', { ns: 'product' })}
           </h3>
-          <p className="text-sm text-center">{description}</p>
+          <p className="text-sm text-left">{description}</p>
           <hr />
           <h3 className="text-sm sm:text-base font-medium sm:text-xl sm:font-bold">
             {t('Info.Title', { ns: 'product' })}

@@ -1,4 +1,3 @@
-import Notification from '@/components/Notification';
 import { deleteItem, selectCart, updateItemQty } from '@/reducers/cartSlice';
 import { resetMessage, setMessage } from '@/reducers/notifySlice';
 import { useAppDispatch, useAppSelector } from '@/reducers/reduxHooks';
@@ -87,7 +86,7 @@ const CartItem = ({ obj }: IParams) => {
                 <input
                   type="number"
                   min="1"
-                  className="w-24 border-1 rounded-sm"
+                  className="w-24 border-1 border-black rounded-sm"
                   placeholder={String(qty)}
                   onChange={handleQtyChange}
                 />
@@ -104,7 +103,6 @@ const CartItem = ({ obj }: IParams) => {
                   {t('Delete', { ns: 'cart' })}
                 </button>
               </div>
-              <Notification />
             </div>
           </div>
         </div>

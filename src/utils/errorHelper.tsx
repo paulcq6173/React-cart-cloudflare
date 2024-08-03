@@ -9,11 +9,12 @@ export const ErrorHandler = (error: unknown) => {
     setTimeout(() => {
       dispatch(resetMessage());
     }, 5000);
+  } else {
+    dispatch(setMessage({ message: 'Unexpected Error occured' }));
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 5000);
   }
-  dispatch(setMessage({ message: 'Unexpected Error occured' }));
-  setTimeout(() => {
-    dispatch(resetMessage());
-  }, 5000);
 
   /*if (axios.isAxiosError(error))  {
         const { request, response } = error;

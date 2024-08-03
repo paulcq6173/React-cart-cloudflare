@@ -1,3 +1,4 @@
+import Notification from '@/components/Notification';
 import useLogin from '@/hooks/useLogin';
 import { userLogin } from '@/reducers/loginSlice';
 import { resetMessage, setMessage } from '@/reducers/notifySlice';
@@ -7,7 +8,6 @@ import ErrorHelper from '@/utils/errorHelper';
 import localStorageHelper from '@/utils/localStorageHelper';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import Notification from '../Notification';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -21,20 +21,17 @@ const LoginForm = () => {
     try {
       const response = await authService.login(loginHook.logindata);
 
-      switch (response.status) {
-        case 200:
-          break;
-        default:
-          dispatch(
-            setMessage({
-              message: t(`Error.${response.message}`),
-              success: false,
-            })
-          );
-          setTimeout(() => {
-            dispatch(resetMessage());
-          }, 5000);
-          return;
+      if (!response.userId) {
+        dispatch(
+          setMessage({
+            message: t(`Error.${response.message}`),
+            success: false,
+          })
+        );
+        setTimeout(() => {
+          dispatch(resetMessage());
+        }, 5000);
+        return;
       }
 
       localStorageHelper.saveUser(response);

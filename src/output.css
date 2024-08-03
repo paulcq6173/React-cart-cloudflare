@@ -781,6 +781,18 @@ video {
   height: fit-content;
 }
 
+.h-svh {
+  height: 100svh;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1416,6 +1428,10 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {

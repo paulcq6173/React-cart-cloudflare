@@ -26,8 +26,13 @@ const Header = () => {
   const dummyData = [
     {
       src: '/images/11066456_4650509.jpg',
-      artitle: 'Books Autumn Sales 2023',
-      desc: '2023/09/04 - 2023/11/30',
+      artitle: 'Books Autumn Sales 2024',
+      desc: '2024/09/04 - 2024/11/30',
+    },
+    {
+      src: '/images/realistic-coming-soon-background_91128-1644.jpg',
+      artitle: 'Next Event',
+      desc: 'Coming Soon',
     },
   ];
 
@@ -44,7 +49,7 @@ const Header = () => {
             <img
               src={dummyData[sliderIndex].src}
               alt="Event"
-              className="w-36 h-40 sm:w-32"
+              className="pt-4 w-36 h-40 sm:w-32"
             />
             <span className="relative z-0 top-10 left-5 text-xl font-bold">
               <h2>{dummyData[sliderIndex].artitle}</h2>

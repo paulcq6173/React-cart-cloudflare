@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "start": "wrangler pages dev",
     "deploy": "wrangler pages deploy dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -46,6 +47,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-svgr": "^4.2.0",
-    "wrangler": "^3.66.0"
+    "wrangler": "^3.68.0"
   }
 }
