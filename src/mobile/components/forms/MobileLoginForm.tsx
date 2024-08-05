@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/reducers/reduxHooks';
 import authService from '@/services/authService';
 import ErrorHelper from '@/utils/errorHelper';
 import localStorageHelper from '@/utils/localStorageHelper';
+import { isUser } from '@/utils/types';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -21,21 +22,17 @@ const LoginForm = () => {
     try {
       const response = await authService.login(loginHook.logindata);
 
-      switch (response.status) {
-        case 400:
-        case 404:
-        case 409:
-        case 500:
-          dispatch(
-            setMessage({
-              message: t(`Error.${response.message}`),
-              success: false,
-            })
-          );
-          setTimeout(() => {
-            dispatch(resetMessage());
-          }, 5000);
-          return;
+      if (!isUser(response)) {
+        dispatch(
+          setMessage({
+            message: t(`Error.${response.message}`),
+            success: false,
+          })
+        );
+        setTimeout(() => {
+          dispatch(resetMessage());
+        }, 5000);
+        return;
       }
 
       localStorageHelper.saveUser(response);

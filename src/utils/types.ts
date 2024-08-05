@@ -1,3 +1,5 @@
+import { TUser } from '@/reducers/loginSlice';
+
 interface IDropdownOption {
   // Each child in a list should have a unique "key" prop.
   id: number;
@@ -51,3 +53,12 @@ export interface IOrderData {
   options: option[];
   note: string;
 }
+
+export interface IMessageResult {
+  message: string;
+  status: number;
+}
+
+export const isUser = (user: TUser | IMessageResult): user is TUser => {
+  return 'userId' in user && 'username' in user;
+};

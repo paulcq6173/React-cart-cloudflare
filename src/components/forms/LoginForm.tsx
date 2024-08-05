@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/reducers/reduxHooks';
 import authService from '@/services/authService';
 import ErrorHelper from '@/utils/errorHelper';
 import localStorageHelper from '@/utils/localStorageHelper';
+import { isUser } from '@/utils/types';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ const LoginForm = () => {
     try {
       const response = await authService.login(loginHook.logindata);
 
-      if (!response.userId) {
+      if (!isUser(response)) {
         dispatch(
           setMessage({
             message: t(`Error.${response.message}`),

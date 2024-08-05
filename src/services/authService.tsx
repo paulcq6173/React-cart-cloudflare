@@ -1,24 +1,39 @@
+import { TUser } from '@/reducers/loginSlice';
 import { ErrorHandler } from '@/utils/errorHelper';
 
-interface IRegisterParams {
-  username: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
+interface IBaseParams {
+  password?: string | undefined;
 }
 
-interface ILoginParams {
-  account: string | undefined;
-  password: string | undefined;
+interface IRegisterParams extends IBaseParams {
+  username?: string | undefined;
+  email?: string | undefined;
+}
+
+interface ILoginParams extends IBaseParams {
+  account?: string | undefined;
+}
+
+interface IVerifyResult {
+  token?: string | undefined;
+  success: boolean;
+}
+
+interface IMesResult {
+  message: string;
+  status: number;
 }
 
 const baseUrl: string = '/api';
 
-const verifyToken = async (token: FormDataEntryValue) => {
-  let result;
+const verifyToken = async (
+  token: FormDataEntryValue
+): Promise<IVerifyResult | null> => {
+  let result: IVerifyResult = { success: true };
 
   try {
     // Turnstile verify process
-    const verifyRes = await fetch(`${baseUrl}/verify`, {
+    const verifyRes: Response = await fetch(`${baseUrl}/verify`, {
       method: 'POST',
       body: JSON.stringify({ token }),
       headers: {
@@ -39,7 +54,7 @@ const verifyToken = async (token: FormDataEntryValue) => {
   return result;
 };
 
-const register = async (data: IRegisterParams) => {
+const register = async (data: IRegisterParams): Promise<IMesResult> => {
   let response;
 
   try {
@@ -64,7 +79,7 @@ const register = async (data: IRegisterParams) => {
   return response.json();
 };
 
-const login = async (data: ILoginParams) => {
+const login = async (data: ILoginParams): Promise<TUser | IMesResult> => {
   const respone = await fetch(`${baseUrl}/auth/login`, {
     body: JSON.stringify(data), // must match 'Content-Type' header
     method: 'POST',

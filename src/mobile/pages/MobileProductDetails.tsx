@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ProductDetails = () => {
-  const [data, setData] = useState<IData>();
+  const [data, setData] = useState<IData | null>();
   const productUrl = useLocation();
   // pathname = "/mobile/products/id" ; index[3]=4rd string=id
   const productID = productUrl.pathname.split('/')[3];

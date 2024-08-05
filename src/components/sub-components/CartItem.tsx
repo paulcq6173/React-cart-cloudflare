@@ -23,7 +23,9 @@ const CartItem = ({ obj }: IParams) => {
   const { gtin, price } = obj;
   let stock = 0;
   productService.getProductById(gtin).then((data) => {
-    stock = data.stock;
+    if (data) {
+      stock = data.stock;
+    }
   });
   // Because 1.0 + 1.0 + 1.0 !== 3.0
   const itemPrice = Math.floor(price);

@@ -67,9 +67,6 @@ const MobileCart = () => {
     );
   };
 
-  /** Check If anything out of stock or doesn't exist */
-  //const { data, error } = ItemStatus(itemArr);
-
   const handleSubmit = async () => {
     if (active) {
       return;
@@ -92,10 +89,13 @@ const MobileCart = () => {
 
           if (data.status === 200) {
             dispatch(
-              setMessage({ message: t('OrderSuccess', { ns: 'cart' }) })
+              setMessage({
+                message: t('OrderSuccess', { ns: 'cart' }),
+                success: true,
+              })
             );
             setTimeout(() => {
-              resetMessage();
+              dispatch(resetMessage());
             }, 3000);
 
             setTimeout(() => navigator('/mobile'), 5000);
@@ -103,13 +103,9 @@ const MobileCart = () => {
             const { message } = data;
             dispatch(setMessage({ message, success: false }));
             setTimeout(() => {
-              resetMessage();
+              dispatch(resetMessage());
             }, 5000);
           }
-
-          // Update stock must be after order be created.
-          //setStockData(data, userID);
-          //console.log('setting stock data...');
         }
       } else {
         dispatch(
@@ -119,7 +115,7 @@ const MobileCart = () => {
           })
         );
         setTimeout(() => {
-          resetMessage();
+          dispatch(resetMessage());
         }, 5000);
       }
     } catch (err: unknown) {
